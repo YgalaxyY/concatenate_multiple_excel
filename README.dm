@@ -1,1 +1,1 @@
-#I just help my borther with small app
+This little message is written for my big brother, it takes all your xlsx files and writes them into one report file.xlsx, you can edit the view of the report files.xlsx as you want, this small code will be able to add new data without resetting the appearance of your document
