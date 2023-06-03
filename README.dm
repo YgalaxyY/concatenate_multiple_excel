@@ -1,1 +1,1 @@
-This little message is written for my big brother, it takes all your xlsx files and writes them into one report file.xlsx, you can edit the view of the report files.xlsx as you want, this small code will be able to add new data without resetting the appearance of your document
+This small application was written for my older brother. It takes all your xlsx files and writes them into one file called report.xlsx. You can edit the appearance of the report.xlsx file as you wish. This small code can add new data without resetting the appearance of your document.
