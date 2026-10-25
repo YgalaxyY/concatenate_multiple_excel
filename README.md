@@ -55,3 +55,15 @@
 ├── 📊 report.xlsx        # Целевой файл (куда пойдут данные)
 ├── 📈 data_01.xlsx       # Источник данных 1
 └── 📈 data_02.xlsx       # Источник данных 2
+
+---
+
+## Run
+
+- **Windows build:** download `COOPERATE.exe` from [Releases](../../releases/latest).
+- **From source:**
+
+```sh
+pip install -r requirements.txt
+python COOPERATE.py
+```
