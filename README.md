@@ -1,39 +1,22 @@
 # Excel Merge Core
 
-Учебный прототип на Python для объединения нескольких Excel-файлов в один отчёт через небольшой графический интерфейс.
+A Python desktop prototype that consolidates rows from multiple XLSX files into one workbook. It scans the current folder, skips the output workbook and merges the inputs with pandas.
 
+[Source code](COOPERATE.py) · [Русский](README.ru.md)
 
-## Что делает код
+## Example
 
-`COOPERATE.py` ищет файлы с окончанием `xlsx` в текущей рабочей папке, исключает `report.xlsx` из входных данных, читает таблицы через `pandas.read_excel(..., header=None)` и объединяет строки через `pd.concat`. Результат записывается в лист `Sheet1` существующей книги.
+Two headerless input sheets contain the rows `A, 10`, `B, 20` and `C, 30`. The output sheet contains all three rows. Headers are treated as ordinary rows. The prototype uses pandas, openpyxl, PySimpleGUI and xlwings.
 
-Технологии проекта: Python, pandas, openpyxl, PySimpleGUI. После закрытия интерфейса вызывается `xlwings.Book("report.xlsx")`, поэтому для этого шага требуется установленный Microsoft Excel и поддерживаемое окружение xlwings.
+## Try it with sample data
 
-## Запуск из исходников
+1. Create a separate test folder with two sample XLSX files and a blank `report.xlsx` containing a sheet named `Sheet1`. Copy [COOPERATE.py](COOPERATE.py) there.
+2. Activate a virtual environment and install [requirements.txt](requirements.txt). Package versions are unpinned and setup may depend on the PySimpleGUI release.
+3. From the test folder, run `python COOPERATE.py`. In the window, choose **Create a new report about clients**. After the GUI closes, the script attempts to open the report with xlwings, which needs Microsoft Excel in this workflow.
 
-Работайте в отдельной папке с копиями или искусственными данными. Подготовьте свою пустую книгу `report.xlsx` с листом `Sheet1` и несколько входных `.xlsx`-файлов. Запускайте скрипт из этой же папки.
+## Current limits
 
-```sh
-python -m venv .venv
-# Активируйте окружение, затем:
-python -m pip install -r requirements.txt
-python COOPERATE.py
-```
-
-В окне нажмите `Create a new report about clients`. Исходники и зависимости доступны в этом репозитории; версии зависимостей пока не зафиксированы, совместимость свежего окружения требует проверки. В частности, доступность и условия установки PySimpleGUI зависят от выбранной версии.
-
-## Пример
-
-Если первая таблица содержит строки `A, 10` и `B, 20`, а вторая — `C, 30`, результатом будет таблица из трёх строк. Заголовки обрабатываются как обычные строки. Дубликаты не удаляются, формулы и оформление исходников не переносятся как отдельная функциональность.
-
-## Ограничения текущей версии
-
-- Код рассчитывает на заранее существующий `report.xlsx`. При его отсутствии переменная целевой книги может указывать на входной файл; не запускайте на единственной копии данных.
-- Путь поиска — текущая рабочая папка, выбор произвольной папки не реализован.
-- Нет проверки совпадения столбцов, обработки повреждённых или заблокированных файлов.
-- Старые строки в целевом листе не очищаются: перед новым запуском нужен чистый отчёт.
-- Для больших файлов нет замеров времени или потребления памяти; устойчивость в рабочей эксплуатации не заявляется.
-
-## Следующие улучшения
-
-Явный выбор входной папки и выходного файла, проверка схемы столбцов, понятные сообщения об ошибках и проверка результата на искусственных данных.
+- The current code expects a pre-existing `report.xlsx`. Use a blank output and input copies each time. Without the prepared output, the script can point at an input workbook.
+- The prototype merges row values. It does not align mismatched schemas, remove duplicates or preserve workbook styling.
+- It looks for inputs in the current working directory and does not clear older rows left in the output worksheet.
+- Compatibility with newly installed dependencies and large workbooks has not been measured.
